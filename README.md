@@ -12,7 +12,7 @@
 | **Theme** | argon |
 | **User** | root |
 | **Password** |
-| **Login Address** | 192.168.31.1 |
+| **Login Address** | 192.168.1.1 |
 
 <br />
 
