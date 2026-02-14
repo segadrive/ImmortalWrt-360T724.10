@@ -139,10 +139,11 @@ jobs:
         prerelease: false
 
     - name: Delete old Releases
-      uses: dev-drprasad/delete-older-releases@v1.0.0
+      uses: actions/delete-package-versions@v4
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        keep_latest: 3
-        delete_tags: true
+        package-name: 'OpenWrt_firmware'  # 对应你上传的固件包名
+        keep-latest: 3
+        delete-only-untagged-versions: false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
