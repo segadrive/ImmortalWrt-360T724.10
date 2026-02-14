@@ -21,10 +21,24 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
+      packages: write  # 新增：赋予删除Release/包版本的权限，解决exit code 128
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Fix swapfile permission and create swap (解决EACCES权限错误)
+      run: |
+        # 创建并配置swapfile，避免权限拒绝
+        if [ ! -f /swapfile ]; then
+          sudo fallocate -l 8G /swapfile  # 8G swap满足OpenWrt编译需求
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+        fi
+        sudo chown $USER:$GROUPS /swapfile  # 赋予当前用户访问权限
+        # 验证swap是否生效
+        swapon --show
 
     - name: Initialization environment
       env:
@@ -142,8 +156,8 @@ jobs:
       uses: actions/delete-package-versions@v4
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        package-name: 'OpenWrt_firmware'  # 对应你上传的固件包名
-        keep-latest: 3
+        package-name: 'OpenWrt_firmware'  # 对应固件包名
+        package-type: 'container'  # 新增：必填参数，解决参数组合无效问题
+        min-versions-to-keep: 3  # 替换无效的keep-latest参数
         delete-only-untagged-versions: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}  # 显式传入token，规范配置
