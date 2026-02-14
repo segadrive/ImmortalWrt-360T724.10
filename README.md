@@ -14,21 +14,8 @@
 | **Password** |
 | **Login Address** | 192.168.1.1 |
 
-<br />
 
-## LEDE
 
-| Name | Description |
-|:-----------:|:------:|
-| **Source** | [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede) |
-| **Branch** | master |
-| **Plugins** | cloudflared autoreboot argon-config |
-| **Theme** | argon |
-| **User** | root |
-| **Password** |
-| **Login Address** | 192.168.31.1 |
-
-<br />
 
 ## Credits
 
