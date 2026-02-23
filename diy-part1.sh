@@ -19,3 +19,9 @@
 # echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 echo 'src-git taskplan https://github.com/sirpdboy/luci-app-taskplan' >>feeds.conf.default
 echo 'src-git timecontrol https://github.com/gaobin89/luci-app-timecontrol' >>feeds.conf.default
+src-git packages https://github.com/openwrt/packages.git;master
+src-git luci https://github.com/openwrt/luci.git;master
+src-git routing https://git.openwrt.org/feed/routing.git
+src-git telephony https://git.openwrt.org/feed/telephony.git
+src-git small https://github.com/kenzok8/small.git
+src-git kenzo https://github.com/kenzok8/openwrt-packages.git
